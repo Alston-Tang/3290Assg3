@@ -10,7 +10,7 @@ imshow(alpha);
 pause;
 
 %part2; gray matting
-img = im2double(imread('img/GRAY/01.png'));
+img = im2double(imread('img/GRAY/04.png'));
 alpha = graymatt(img);
 imshow(alpha)
 pause;
