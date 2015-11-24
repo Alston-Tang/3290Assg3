@@ -2,40 +2,59 @@ function res = poisson_equ( img, F_B, trimap )
 % Input:
 %   - img: input color image
 %   - F_B: F-B image
-%   - mask: mask=1 for all undecided pixels
+%   - trimap: trimap
 % Output:
 %   - res: result of alpha 
-    src     = img./(F_B);
-    trg     = trimap;
-    %% Poisson Equation
-    mask = double(trimap==0.5);     % undecided regions
+
+    [H,W,C] = size(img);
+% use robust eps to avoid dividing 0
+% TODO: change eps value will probably produce better results
+    eps     = 1e-3;
+    F_B     = sign(F_B).*max(abs(F_B),eps);
+    F_B(F_B==0)  = eps;
+    %% calculate image gradients
+    gx = zeros(H,W); 
+    gy = zeros(H,W); 
+    j = 1:H-1; 
+    k = 1:W-1;
+    gx(j,k) = (img(j,k+1) - img(j,k)); 
+    gy(j,k) = (img(j+1,k) - img(j,k));
+    % image gradients are divided by F-B
+    gx = gx./F_B;
+    gy = gy./F_B;
+    
+    %% solve Poisson equation
+    mask_undecided = (trimap==0.5);
+    res = solve_poisson_equ( gx, gy, mask_undecided, trimap );
+    
+    res(res>1) = 1;
+    res(res<0) = 0;
+end
+
+function out = solve_poisson_equ( Ix, Iy, mask, img )
+    
+    [H,W] = size(img);
+    gxx = zeros(H,W); 
+    gyy = zeros(H,W);
+    j = 1:H-1; 
+    k = 1:W-1;
+    % Laplacian
+    gxx(j,k+1) = Ix(j,k+1) - Ix(j,k); 
+    gyy(j+1,k) = Iy(j+1,k) - Iy(j,k); 
+    f = -(gxx + gyy);
+    
+    I = f.*mask;
     h   = fspecial('laplacian', 0);
     chi = imfilter(double(mask),h);
     chi(chi<0) = 0;
     chi(chi>0) = 1;
-
-    % Error
-    erf = trg - src;
-
-    a = erf;
-    a(~chi) =  0;
-
-    % Laplace eq. with Dirichlet bc 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    Ierf = LaplacianDirichlet(a,mask);
-    temp = Ierf + src;
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    trg(mask) = temp(mask);
-    res = trg;
-end
-
-function [ out ] = LaplacianDirichlet(rhs, mask)
-    I = rhs;
-    [r,c] = size(I);
+    chi = chi.*(~mask);
+    I(chi>0) = img(chi>0);
+    
+    [r,c] = size(img);
     k = r*c;
 
     %% Matrix Construction
-
     % Ones for columns and rows
     dy = ones(size(I,1)-1, size(I,2));
     dy = padarray(dy, [1 0], 'post');
@@ -44,8 +63,7 @@ function [ out ] = LaplacianDirichlet(rhs, mask)
     dx = ones(size(I,1), size(I,2)-1);
     dx = padarray(dx, [0 1], 'post');
     dx = dx(:);
-
-
+    
     % Construct five-point spatially homogeneous Laplacian matrix
     C(:,1) = dx;
     C(:,2) = dy;
@@ -68,7 +86,5 @@ function [ out ] = LaplacianDirichlet(rhs, mask)
     out = L\I(:);
     out = reshape(out, r, c);
 
-    % Sanitiy check
-    % out2 = L*out(:);
-    % out2 = reshape(out2, r, c);
+    out(~mask) = img(~mask);
 end
