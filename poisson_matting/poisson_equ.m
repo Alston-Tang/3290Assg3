@@ -9,7 +9,7 @@ function res = poisson_equ( img, F_B, trimap )
     [H,W,C] = size(img);
 % use robust eps to avoid dividing 0
 % TODO: change eps value will probably produce better results
-    eps     = 1e-3;
+    eps     = 1e-9;
     F_B     = sign(F_B).*max(abs(F_B),eps);
     F_B(F_B==0)  = eps;
     %% calculate image gradients

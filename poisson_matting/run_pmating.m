@@ -1,9 +1,9 @@
 
 % input image
-img     = im2double( imread('imgs\1.bmp') );
+img     = im2double( imread('img/1.bmp') );
 
 % input trimap
-trimap  = im2double( imread('imgs\1-mask.bmp') );
+trimap  = im2double( imread('img/1-mask.bmp') );
 trimap  = trimap(:,:,1);
 % make trimap value to standard. 1 - foregournd; 0 - background; 0.5 - undecided.
 trimap(trimap>0.8) = 1;
@@ -29,6 +29,9 @@ F_B = F-B;
 
 % TODO: apply gaussian filter to F_B
 
+%%# Read an image
+G = fspecial('gaussian',[3, 3], 1);
+F_B = imfilter(F_B,G,'same');
 
 % initialize alpha
 alpha = trimap;
@@ -37,12 +40,22 @@ alpha = trimap;
 for i = 1:maxIters
     % TODO: solve for undecided regions using poission equation
     mask_undecided 	= (trimap==0.5); % mask for all undecide pixels
-    alpha   		= poisson_equ( img, F_B, mask_undecided );
+    alpha   		= poisson_equ( img, F_B, trimap );
     
     % TODO: update F and B
+    
+    trimap(alpha > 0.98) = 1;
+    trimap(alpha < 0.02) = 0;
+    [F,B] = find_nearestFB( trimap, img );
+    F_B = F - B;
 
 
     % TODO: apply gaussian filter to F_B
     
+    G = fspecial('gaussian',[3, 3], 1);
+    F_B = imfilter(F_B,G,'same');
     
 end
+alpha(alpha>0.5) = 1;
+alpha(alpha<=0.5) = 0;
+imshow(alpha);
