@@ -1,6 +1,7 @@
 
 % input image
 img     = im2double( imread('img/1.bmp') );
+oriImg = img;
 
 % input trimap
 trimap  = im2double( imread('img/1-mask.bmp') );
@@ -15,7 +16,7 @@ if size(img,3) == 3
 end
 
 % set parameters for iterations, you can change
-maxIters = 10;
+maxIters = 1;
 
 % TODO: initialize F and B, both are gray-scale image according to paper
 % for 'definite foreground' pixels, F is value of img, B is zeros. 
@@ -30,9 +31,7 @@ F_B = F-B;
 % TODO: apply gaussian filter to F_B
 
 %%# Read an image
-G = fspecial('gaussian',[3, 3], 1);
-F_B = imfilter(F_B,G,'same');
-
+F_B = imgaussfilt(F_B, 2);
 % initialize alpha
 alpha = trimap;
 
@@ -44,18 +43,15 @@ for i = 1:maxIters
     
     % TODO: update F and B
     
-    trimap(alpha > 0.98) = 1;
-    trimap(alpha < 0.02) = 0;
+    trimap(alpha > 0.95) = 1;
+    trimap(alpha < 0.05) = 0;
     [F,B] = find_nearestFB( trimap, img );
     F_B = F - B;
-
-
     % TODO: apply gaussian filter to F_B
-    
-    G = fspecial('gaussian',[3, 3], 1);
-    F_B = imfilter(F_B,G,'same');
-    
+    F_B = imgaussfilt(F_B, 2);
 end
-alpha(alpha>0.5) = 1;
-alpha(alpha<=0.5) = 0;
-imshow(alpha);
+
+addpath('../');
+white = ones(size(img, 1), size(img, 2), 3);
+mattImg = matt(alpha, oriImg, white);
+imshow(mattImg);
