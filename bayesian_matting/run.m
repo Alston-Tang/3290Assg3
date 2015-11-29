@@ -7,3 +7,7 @@ img          = imread('./img/3.png');
 segmentation = imread('./segmentation/3.png');
 
 [F B alpha] = bayesian_matting(img, segmentation);
+
+addpath('../');
+res = matt(alpha, img, ones(size(img)));
+imshow(res);

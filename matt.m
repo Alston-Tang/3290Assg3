@@ -1,6 +1,8 @@
 function [ resImg ] = matt(alpha, fImg, bImg)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
+fImg = double(fImg) / 255;
+bImg = double(bImg) / 255;
 
 fR = fImg(:,:,1);
 fG = fImg(:,:,2);
