@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- Responsive viewport for smartphone devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- least.js 2 CSS file -->
+    <link href="least/css/least.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+</head>
+<body>
+<div class="ui grid centered" style="margin-top: 20px; margin-bottom: 50px">
+    <div class="fourteen wide column">
+        <h1>Assignment 3</h1>
+        <h2>Image Matting</h2>
+    </div>
+</div>
+
+
+<div class="ui grid centered">
+    <div class="fourteen wide column">
+        <h2 class="ui header dividing">Blue Screen Matting(No Blue)</h2>
+        <div class="ui segment">
+
+            <p>No-Blue solution assumes the foreground does not contain any blue color. Thus we can reduce one unknown and solve the alpha value. However, it is rather limited for blue color is usually essential for an image.</p>
+        </div>
+        <section id="test" class="least">
+
+            <!-- Least Gallery: Fullscreen Preview -->
+            <div class="least-preview"></div>
+
+            <!-- Least Gallery: Thumbnails -->
+            <ul class="least-gallery">
+                <!-- 1th thumbnail -->
+                <li>
+                    <a href="imgs/noblue-res-01.jpg" data-subtitle="View Picture" data-caption="01" >
+                        <img src="imgs/noblue-res-01.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-01.jpg" data-subtitle="View Picture" data-caption="01" >
+                        <img src="imgs/noblue-alpha-01.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-02.jpg" data-subtitle="View Picture" data-caption="02" >
+                        <img src="imgs/noblue-res-02.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-02.jpg" data-subtitle="View Picture" data-caption="02" >
+                        <img src="imgs/noblue-alpha-02.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-03.jpg" data-subtitle="View Picture" data-caption="03" >
+                        <img src="imgs/noblue-res-03.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-03.jpg" data-subtitle="View Picture" data-caption="03" >
+                        <img src="imgs/noblue-alpha-03.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-04.jpg" data-subtitle="View Picture" data-caption="04" >
+                        <img src="imgs/noblue-res-04.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-04.jpg" data-subtitle="View Picture" data-caption="04" >
+                        <img src="imgs/noblue-alpha-04.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-05.jpg" data-subtitle="View Picture" data-caption="05" >
+                        <img src="imgs/noblue-res-05.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-05.jpg" data-subtitle="View Picture" data-caption="05" >
+                        <img src="imgs/noblue-alpha-05.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-06.jpg" data-subtitle="View Picture" data-caption="06" >
+                        <img src="imgs/noblue-res-06.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-06.jpg" data-subtitle="View Picture" data-caption="06" >
+                        <img src="imgs/noblue-alpha-06.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-07.jpg" data-subtitle="View Picture" data-caption="07" >
+                        <img src="imgs/noblue-res-07.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-07.jpg" data-subtitle="View Picture" data-caption="07" >
+                        <img src="imgs/noblue-alpha-07.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-08.jpg" data-subtitle="View Picture" data-caption="08" >
+                        <img src="imgs/noblue-res-08.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-08.jpg" data-subtitle="View Picture" data-caption="08" >
+                        <img src="imgs/noblue-alpha-08.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-09.jpg" data-subtitle="View Picture" data-caption="09" >
+                        <img src="imgs/noblue-res-09.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-09.jpg" data-subtitle="View Picture" data-caption="09" >
+                        <img src="imgs/noblue-alpha-09.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-res-10.jpg" data-subtitle="View Picture" data-caption="10" >
+                        <img src="imgs/noblue-res-10.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/noblue-alpha-10.jpg" data-subtitle="View Picture" data-caption="10" >
+                        <img src="imgs/noblue-alpha-10.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<div class="ui grid centered">
+    <div class="fourteen wide column">
+        <h2 class="ui header dividing">Blue Screen Matting(GREY OR FLESH)</h2>
+        <div class="ui segment">
+            <p>The grey or flesh solution reduce the unknown with the assumption that Rf is related to Bf. So we can construct a linear equation <b>Rf = a*Bf + b</b>. In order to get a good result, the parameter a and b need to be carefully adjusted according to the image content.</p>
+        </div>
+        <section id="least" class="least">
+
+            <!-- Least Gallery: Fullscreen Preview -->
+            <div class="least-preview"></div>
+
+            <!-- Least Gallery: Thumbnails -->
+            <ul class="least-gallery">
+                <!-- 1th thumbnail -->
+                <li>
+                    <a href="imgs/gray-res-04.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-res-04.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-alpha-04.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-alpha-04.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-res-07.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-res-07.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-alpha-07.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-alpha-07.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-res-16.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-res-16.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-alpha-16.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-alpha-16.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-res-24.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-res-24.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-alpha-24.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-alpha-24.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-res-25.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-res-25.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-alpha-25.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-alpha-25.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-res-27.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-res-27.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/gray-alpha-27.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/gray-alpha-27.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<div class="ui grid centered">
+    <div class="fourteen wide column">
+        <h2 class="ui header dividing">Blue Screen Matting(TRIANGULATION)</h2>
+        <div class="ui segment">
+            <p>The triangulation relax the requirement for the foreground. Instead, it requires two different color background so that we can have enough relationships to rebuild the alpha. The drawback of this method is the requirement of two different backgrounds with a same foreground is sometimes impossible.</p>
+        </div>
+        <section id="least2" class="least">
+
+            <!-- Least Gallery: Fullscreen Preview -->
+            <div class="least-preview"></div>
+
+            <!-- Least Gallery: Thumbnails -->
+            <ul class="least-gallery">
+                <!-- 1th thumbnail -->
+                <li>
+                    <a href="imgs/tri-res-01.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-01.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-01.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-01.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-02.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-02.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-02.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-02.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-03.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-03.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-03.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-03.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-04.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-04.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-04.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-04.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-05.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-05.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-05.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-05.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-06.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-06.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-06.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-06.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-07.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-07.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-07.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-07.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-08.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-08.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-08.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-08.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-09.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-09.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-09.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-09.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-res-10.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/tri-res-10.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/tri-alpha-10.jpg" data-subtitle="View Picture">
+                        <img src="imgs/tri-alpha-10.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<div class="ui grid centered">
+    <div class="fourteen wide column">
+        <h2 class="ui header dividing">Poisson Matting</h2>
+        <div class="ui segment">
+            <p>Other than add limitation to foreground or background, this method try to solve equations by the assumption that derivation inside foreground and background will be relatively small. Thus the alpha have a relation ship <b>&nabla;&alpha; &asymp; 1/(F-B) * &nabla;I</b>. Thus the objective of this algorithm is to minimize <b>&sum;||&nabla;&alpha;p - 1/(Fp-Bp)*&nabla;Ip||^2</b>. The derivation of this expression is a poisson equation so that it can be solved.</p>
+            <p>The max iteration for poisson equation solver is 1 because it seems 1 iteration can give the best result in test. The &sigma; of gaussian filter is 2. The nearest FB is done by flushing from boundary. Although it use Manhattan distance instead of real distance, it seems this estimation will not cause any significant difference.</p>
+            <p>Part of results of this algorithm are not as good as expected. One reason is the parameter need to be more carefully adjusted. Another reason is that a global poisson matting can not give very good result by nature. Some local poisson matting may need to be done.</p>
+        </div>
+        <section id="least3" class="least">
+
+            <!-- Least Gallery: Fullscreen Preview -->
+            <div class="least-preview"></div>
+
+            <!-- Least Gallery: Thumbnails -->
+            <ul class="least-gallery">
+                <!-- 1th thumbnail -->
+                <li>
+                    <a href="imgs/poisson-res-01.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/poisson-res-01.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/poisson-alpha-01.jpg" data-subtitle="View Picture">
+                        <img src="imgs/poisson-alpha-01.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/poisson-res-02.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/poisson-res-02.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/poisson-alpha-02.jpg" data-subtitle="View Picture">
+                        <img src="imgs/poisson-alpha-02.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/poisson-res-04.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/poisson-res-04.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/poisson-alpha-04.jpg" data-subtitle="View Picture">
+                        <img src="imgs/poisson-alpha-04.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/poisson-res-05.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/poisson-res-05.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/poisson-alpha-05.jpg" data-subtitle="View Picture">
+                        <img src="imgs/poisson-alpha-05.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<div class="ui grid centered">
+    <div class="fourteen wide column">
+        <h2 class="ui header dividing">Bayesian Matting</h2>
+        <div class="ui segment">
+            <p>The objectives of bayesian matting and poisson matting are the same. Bayesian matting also try to distinct foreground from background without any other limitation. Instead of the assumption about gradient, it first calculated an estimated alpha of a pixel by make a weighted average of surrounding pixels, then solve the real alpha value under a Markov model.</p>
+            <p>The weight of each pixel at the estimation is calculated by <b>&alpha;^2*exp(-distance^2 / &sigma;)</b>, where &alpha; is regulated to [0,1] and &sigma;=5</p>
+            <p>With the estimated &alpha; value, we can solve F and B and further calculate the real &alpha; value.</p>
+            <p>The result is calculated with <b>&sigma;=5, &sigma;C=8, N=23 and n=5</b></p>
+        </div>
+        <section id="least4" class="least">
+
+            <!-- Least Gallery: Fullscreen Preview -->
+            <div class="least-preview"></div>
+
+            <!-- Least Gallery: Thumbnails -->
+            <ul class="least-gallery">
+                <!-- 1th thumbnail -->
+                <li>
+                    <a href="imgs/bay-res-01.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/bay-res-01.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/bay-alpha-01.jpg" data-subtitle="View Picture">
+                        <img src="imgs/bay-alpha-01.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/bay-res-02.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/bay-res-02.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/bay-alpha-02.jpg" data-subtitle="View Picture">
+                        <img src="imgs/bay-alpha-02.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/bay-res-03.jpg" data-subtitle="View Picture" >
+                        <img src="imgs/bay-res-03.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+                <li>
+                    <a href="imgs/bay-alpha-03.jpg" data-subtitle="View Picture">
+                        <img src="imgs/bay-alpha-03.jpg" alt="Alt Image Text" />
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="ui grid centered">
+    <div class="fourteen wide column">
+        <h2 class="ui header dividing">Other Results</h2>
+        <div class="ui segment">
+            <p>I also try to use poisson matting and bayesian matting on other pictures. The results are shown below</p>
+        </div>
+        <table class="ui celled padded table">
+            <thead>
+            <tr><th class="single line">Photo</th>
+                <th>Trimap</th>
+                <th>Poisson</th>
+                <th>Bayesian</th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td>
+                    <img src="imgs/1.jpg" style="max-height: 150px">
+                </td>
+                <td>
+                    <img src="imgs/2.jpg" style="max-height: 150px">
+                </td>
+                <td>
+                    <img src="imgs/custom-1-alpha.jpg" style="max-height: 150px">
+                </td>
+                <td>
+                    <img src="imgs/custom-bay-01.jpg" style="max-height: 150px">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="imgs/3.jpg" style="max-height: 150px">
+                </td>
+                <td>
+                    <img src="imgs/5.jpg" style="max-height: 150px">
+                </td>
+                <td>
+                    <img src="imgs/custom-2.jpg" style="max-height: 150px">
+                </td>
+                <td>
+                    <img src="imgs/custom-bay-02.jpg" style="max-height: 150px">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="ui grid centered">
+    <div class="fourteen wide column">
+        <h2 class="ui header dividing">Time Performance</h2>
+        <div class="ui segment">
+            <p>Test Platform: Intel i7 5820K with 16GB RAM</p>
+        </div>
+        <table class="ui celled padded table">
+            <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Resolution</th>
+                <th>Poisson</th>
+                <th>Bayesian</th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td>
+                    <img src="imgs/1.jpg" style="max-height: 150px">
+                </td>
+                <td>
+                    600 X 337
+                </td>
+                <td>
+                    7.50s
+                </td>
+                <td>
+                    21.53s
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="imgs/3.jpg" style="max-height: 150px">
+                </td>
+                <td>
+                    900 X 720
+                </td>
+                <td>
+                    18.43s
+                </td>
+                <td>
+                    50.15s
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="ui grid centered">
+    <div class="fourteen wide column">
+        <h2 class="ui header dividing">Reference</h2>
+        <ol>
+            <li>Jian Sun, Jiaya Jia, Chi-Keung Tang, and Heung-Yeung Shum, Poisson matting, SIGGRAPH 2004, vol. 23, no. 3, July 2004, pages 315-321</li>
+            <li>Yung-Yu Chuang, Curless B, Salesin D.H, Szeliski R, A Bayesian approach to digital matting, CVPR2001, vol. 2, 2001, pages 264-271  </li>
+        </ol>
+    </div>
+</div>
+
+
+<!-- jQuery library -->
+<script src="least/js/libs/jquery/2.0.2/jquery.min.js"></script>
+<!-- least.js 2 library -->
+<script src="least/js/libs/least/least.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#test').find('.least-gallery').least({$container: $("#test")});
+        $('#least').find('.least-gallery').least({$container: $("#least")});
+        $('#least2').find('.least-gallery').least({$container: $("#least2")});
+        $('#least3').find('.least-gallery').least({$container: $("#least3")});
+        $('#least4').find('.least-gallery').least({$container: $("#least4")});
+    });
+</script>
+</body>
+</html>
